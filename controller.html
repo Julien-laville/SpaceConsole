@@ -1,0 +1,29 @@
+<style>
+    BUTTON {
+        width: 50vw;
+        height: 100vh;
+    }
+
+</style>
+
+<button id="up">Up</button>
+<button id="down">Down</button>
+
+
+
+<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
+
+
+<script>
+    const ac = new AirConsole()
+    
+    up.onclick = function() {
+        ac.message(AirConsole.SCREEN, 'up')
+    }
+    down.onclick = function() {
+        ac.message(AirConsole.SCREEN, 'down')
+    }
+    
+
+
+</script>

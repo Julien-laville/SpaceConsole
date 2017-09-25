@@ -1,0 +1,13 @@
+<div id="info"></div>
+<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
+
+
+<script>
+    const ac = new AirConsole()
+    
+    ac.onMessage = (from, data) => {
+        info.innerHTML = `${from} ${data}`
+    }
+
+
+</script>
