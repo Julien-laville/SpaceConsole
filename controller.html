@@ -1,9 +1,13 @@
 <style>
     BUTTON {
-        width: 50vw;
+        width: 40vw;
         height: 100vh;
     }
-
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 </style>
 
 <button id="up">Up</button>
@@ -15,7 +19,9 @@
 
 
 <script>
-    const ac = new AirConsole()
+    const ac = new AirConsole({
+        orientation : AirConsole.ORIENTATION_LANDSCAPE
+    })
     
     up.onclick = function() {
         ac.message(AirConsole.SCREEN, 'up')

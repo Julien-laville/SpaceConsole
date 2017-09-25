@@ -1,13 +1,45 @@
 <div id="info"></div>
+<div id="debug"></div>
+<canvas id="sc"></canvas>
 <script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
+<style>
+    BODY {
+        background: #fff;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+</style>
 
 
 <script>
+    
+    /* Airconsole */
     const ac = new AirConsole()
+    let fc = 0
     
     ac.onMessage = (from, data) => {
         info.innerHTML = `${from} ${data}`
     }
-
-
+    
+    ac.onConnect = () => {
+        
+    }
+    
+    
+    /* Game */
+    function loop() {
+        
+        
+        debug.innerHTML = fc++
+        requestAnimationFrame(loop)
+    }
+    
+    
+   
+    
+    
+    
 </script>
