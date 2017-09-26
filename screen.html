@@ -2,7 +2,7 @@
 <div id="debug"></div>
 <canvas id="sc"></canvas>
 <script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
-<script type="text/javascript" src="src/box2d.js"></script>
+<script type="text/javascript" src="src/planck.js"></script>
 <script type="text/javascript" src="src/input.js"></script>
 <script type="text/javascript" src="src/air_console_in.js"></script>
 <script type="text/javascript" src="src/space_game.js"></script>
@@ -25,7 +25,9 @@
     const AIR_CONSOLE = false
     const BOX_DEBUG = false
     const DEBUG = false
+
     up = down = left = right = 0
+
     if(AIR_CONSOLE) {
         in_air()
     } else {
@@ -34,32 +36,20 @@
     
     let handle = -1
     let gstatus = 0
-    const b2 = new Box2D()
-    world = null    
+    world = null
     in_game()
     
     function in_game() {
         //map
-        
-        world = new b2.b2World(new b2.b2Vec2(0.0, 0.0), true) // allow pause
+        world = planck.World();
         //cars
-        var car = new b2.b2BodyDef()
-        car.set_type(b2.b2_dynamicBody)
-        var carBody = world.CreateBody(car)
-        
-        var circleShape = new b2.b2CircleShape()
-        circleShape.set_m_radius(0.5)
-        carBody.CreateFixture(circleShape, 1.0)
+
         
         }
     
     
     function in_frame() {
-        world.step(delta)
-        world.DrawDebugData();
-        for(var i = 0; i < entities.length; i ++) {
-            //entities[0]
-        }
+        world.step(delta / 1000);
     }
     
     /* Game */
@@ -79,7 +69,9 @@
         // frame
         
         Update_screen()
-        debug.innerHTML = time
+        if(DEBUG) {
+            debug.innerHTML = time
+        }
         time = performance.now()
     }
     
