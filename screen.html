@@ -2,7 +2,9 @@
 <div id="debug"></div>
 <canvas id="sc"></canvas>
 <script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
-<script type="text/javascript" src="v2d.js"></script>
+<script type="text/javascript" src="src/box2d.js"></script>
+<script type="text/javascript" src="src/input.js"></script>
+<script type="text/javascript" src="src/air_console_in.js"></script>
 <script type="text/javascript" src="src/space_game.js"></script>
 <style>
     BODY {
@@ -20,32 +22,45 @@
 
 
 <script>
+    const AIR_CONSOLE = false
+    const BOX_DEBUG = false
+    const DEBUG = false
+    up = down = left = right = 0
+    if(AIR_CONSOLE) {
+        in_air()
+    } else {
+        in_input()
+    }
+    
     let handle = -1
     let gstatus = 0
+    const b2 = new Box2D()
+    world = null    
+    in_game()
     
-    /* Airconsole */
-    const ac = new AirConsole()
-    let fc = 0
+    function in_game() {
+        //map
+        
+        world = new b2.b2World(new b2.b2Vec2(0.0, 0.0), true) // allow pause
+        //cars
+        var car = new b2.b2BodyDef()
+        car.set_type(b2.b2_dynamicBody)
+        var carBody = world.CreateBody(car)
+        
+        var circleShape = new b2.b2CircleShape()
+        circleShape.set_m_radius(0.5)
+        carBody.CreateFixture(circleShape, 1.0)
+        
+        }
     
-    ac.onMessage = (from, data) => {
-        info.innerHTML = `${from} ${data}`
-    }
     
-    ac.onConnect = (devid) => {
-        ac.setActivePlayers(1)
-        if(gstatus === 0) {
-            gstatus = -1
-            loop()
+    function in_frame() {
+        world.step(delta)
+        world.DrawDebugData();
+        for(var i = 0; i < entities.length; i ++) {
+            //entities[0]
         }
     }
-    
-    ac.onDisconnect = (devid) => {
-        cancelAnimationFrame(handle)
-        info.innerHTML = 'Nobody to play with'
-        debug.innerHTML = ''
-        gstatus = 0
-    }
-    
     
     /* Game */
     const ct = sc.getContext('2d')
