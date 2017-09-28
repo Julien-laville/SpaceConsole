@@ -37,20 +37,9 @@
     let handle = -1
     let gstatus = 0
     world = null
-    in_game()
+    /* init game */
+    in_game()    
     
-    function in_game() {
-        //map
-        world = planck.World();
-        //cars
-
-        
-        }
-    
-    
-    function in_frame() {
-        world.step(delta / 1000);
-    }
     
     /* Game */
     const ct = sc.getContext('2d')
