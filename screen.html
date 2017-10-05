@@ -5,6 +5,7 @@
 <script type="text/javascript" src="src/planck.js"></script>
 <script type="text/javascript" src="src/input.js"></script>
 <script type="text/javascript" src="src/air_console_in.js"></script>
+<script type="text/javascript" src="src/car.js"></script>
 <script type="text/javascript" src="src/space_game.js"></script>
 <style>
     BODY {
@@ -51,10 +52,7 @@
         sc.width+=0//clear
         delta = performance.now() - time
         handle = requestAnimationFrame(loop)
-        
-        // inputs
         in_frame()
-        
         // frame
         
         Update_screen()
@@ -63,7 +61,7 @@
         }
         time = performance.now()
     }
-    
+    loop()
     
    
     
