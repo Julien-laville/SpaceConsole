@@ -1,5 +1,5 @@
 function Update_screen() {
-    world.step(delta / 1000);
+    world.step(16);
     // planck
     for (let body = world.getBodyList(); body; body = body.getNext()) {
         for (let fixture = body.getFixtureList(); fixture; fixture = fixture.getNext()) {

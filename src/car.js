@@ -4,26 +4,33 @@ const Car = function() {
     let heading = 0
     let pivotPos = v2d(0,0)
 
+    const MAX_FORCE = 1
+
+
     let carBox = planck.Box(20, 20);
-    let body = world.createDynamicBody(v2d(0,0))
-        .createFixture(carBox, 0.5);
+    let carFixture = world.createDynamicBody(v2d(20,20))
+        .createFixture(carBox, 1);
+    let body = carFixture.getBody()
+    let pos = body.getPosition()
+    let force
+    let torque = 0
 
     return {
         draw : function () {
             ct.fillStyle = 'red'
-            ct.fillRect(body.getBody().getPosition().x,body.getBody().getPosition().y,20,20)
+            ct.fillRect(pos.x,pos.y,20,20)
         },
         input : function () {
+            force =  1;
             if(up) {
-                speed.y--
+                force = 1
             } else if(down) {
-                speed.y++
-            } else if(right) {
-                speed.x++
-            } else if(left) {
-                speed.x--
+                force = -1
             }
-            //pos.add(speed)
+            body.applyForce(v2d(0,0.01).mul(1), body.getPosition())
+        },
+        r : function () {
+            return body;
         }
     }
 }
